@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Página Inicial</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <script src="js/bootstrap.js"></script>
+</head>
+<body style="height:1500px">
+
+
+
+<div class="container mt-3">
+    <h2>Lista de Clientes</h2>        
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>Celular</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="lista-clientes">
+        
+      </tbody>
+    </table>
+  </div>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Dados do Cliente</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container-fluid">
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="nome" class="form-label">Nome:</label>
+            </div>
+            <div class="card-body bg-light">
+              <input type="nome" class="form-control" id="nome" placeholder="Digite nome" name="nome">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="sobrenome" class="form-label">Sobrenome:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="sobrenome" class="form-control" id="sobrenome" placeholder="Digite sobrenome" name="sobrenome">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="celular" class="form-label">Celular:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="celular" class="form-control" id="celular" placeholder="Digite celular" name="celular">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="cep" class="form-label">CEP:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="cep" class="form-control" id="cep" placeholder="Digite cep" name="cep">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="rua" class="form-label">Rua:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="rua" class="form-control" id="rua" placeholder="Digite rua" name="rua">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="bairro" class="form-label">Bairro:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="bairro" class="form-control" id="bairro" placeholder="Digite bairro" name="bairro">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="uf" class="form-label">UF:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="uf" class="form-control" id="uf" placeholder="Digite uf" name="uf">
+            </div> 
+          </div>
+
+          <div class="card mt-2">
+            <div class="card-header bg-secondary text-white">
+              <label for="localidade" class="form-label">Cidade:</label>
+              
+            </div>
+            <div class="card-body bg-light">
+              <input type="localidade" class="form-control" id="localidade" placeholder="Digite localidade" name="localidade">
+            </div> 
+          </div>
+          <div class="my-5">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="js/js.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/jquery.js"></script>
+<script>
+    const lista = document.getElementById('lista-clientes')
+    clientes.forEach((i, e) => {
+      // console.log('clientes', i.nome)
+    const tr = document.createElement('tr')
+
+    const td0 = document.createElement('td')
+    const avatar = document.createElement('img')
+    avatar.src = `images/${i.avatar}`
+    avatar.className = "rounded-circle"
+    avatar.height = 50
+    td0.append(avatar)
+
+    const td1 = document.createElement('td')
+    td1.innerText = i.nome
+
+    const td2 = document.createElement('td')
+    td2.innerText = i.sobrenome
+
+    const td3 = document.createElement('td')
+    td3.innerText = i.celular
+
+    const td4 = document.createElement('td')
+    
+    const excluir_btn = document.createElement('button')
+    excluir_btn.className = "btn btn-danger excluir"
+    excluir_btn.type = "button"
+    excluir_btn.innerText = "Excluir"
+
+    const editar_btn = document.createElement('button')
+    editar_btn.className = "mx-2 btn btn-warning editar"
+    editar_btn.type = "button"
+    editar_btn.innerText = "Editar"
+
+    td4.append(excluir_btn)
+    td4.append(editar_btn)
+  
+
+    td3.innerText = i.celular
+
+    tr.append(td0)
+    tr.append(td1)
+    tr.append(td2)
+    tr.append(td3)
+    tr.append(td4)
+    lista.append(tr)
+
+    // excluirTr(excluir_btn)
+    })
+
+    // function excluirTr(el){
+    //   $(el).on('click', function(){
+    //     let tr = $(this).closest('tr')
+    //     $(tr).animate( {backgroundColor:'red'}, 1000).fadeOut(500,function() {
+    //         $(tr).remove();
+    //     });
+    //     // $(tr).remove()
+    //     console.log('this', tr)
+    //   })
+    // }
+    $(document).ready(function(){
+      $('.excluir').on('click', function(){
+        let tr = $(this).closest('tr')
+        $(tr).closest('tr').css('background-color', 'red');
+        $(tr).closest("tr").fadeOut(2000, function(){
+                                        $(this).remove();
+                                    })
+        // $(tr).closest('tr').animate( {backgroundColor:'red'}, 1000).fadeOut(2000,function() {
+        //     $(tr).remove();
+        // });
+      })
+
+      $('#cep').on('blur', function(){
+        let cep = $('#cep').val()
+        $.ajax({
+              url: `https://viacep.com.br/ws/${cep}/json/`,
+              method:"get",
+              success: function (response) {
+                console.log(response)
+                $('#cep').val(response.cep)
+                $('#bairro').val(response.bairro)
+                $('#uf').val(response.uf)
+                $('#rua').val(response.logradouro)
+                $('#localidade').val(response.localidade)
+              }
+
+        })
+      })
+
+      $('.editar').on('click', function(){
+        let tr = $(this).closest('tr')
+
+        let nome = $(tr).find("td").eq(1).html();
+        $('#nome').val(nome)
+
+        let sobrenome = $(tr).find("td").eq(2).html();
+        $('#sobrenome').val(sobrenome)
+
+        let celular = $(tr).find("td").eq(3).html();
+        $('#celular').val(celular)
+
+        let modal = document.getElementById('myModal')
+        var myModal = new bootstrap.Modal(modal)
+        myModal.show()
+      })
+    })
+</script>
+</body>
+</html>
+
+

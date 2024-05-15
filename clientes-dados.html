@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Página Inicial</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <script src="js/bootstrap.js"></script>
+</head>
+<body style="height:1500px">
+
+<div class="container-fluid" style="margin-top:80px">
+  
+  <div class="mb-3 mt-3">
+    <label for="cep" class="form-label">CEP:</label>
+    <input type="cep" class="form-control" id="cep" placeholder="Digite cep" name="cep">
+  </div>
+  
+  
+  <div class="mb-3 mt-3">
+    <label for="rua" class="form-label">Rua:</label>
+    <input type="rua" class="form-control" id="rua" placeholder="Digite rua" name="rua">
+  </div>
+  
+  <div class="mb-3 mt-3">
+    <label for="bairro" class="form-label">Bairro:</label>
+    <input type="bairro" class="form-control" id="bairro" placeholder="Digite bairro" name="bairro">
+  </div>
+  
+  <div class="mb-3 mt-3">
+    <label for="uf" class="form-label">UF:</label>
+    <input type="uf" class="form-control" id="uf" placeholder="Digite uf" name="uf">
+  </div>
+  
+  <div class="mb-3 mt-3">
+    <label for="localidade" class="form-label">Cidade:</label>
+    <input type="localidade" class="form-control" id="localidade" placeholder="Digite localidade" name="localidade">
+  </div>
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/js.js"></script>
+
+<script>
+  $('#cep').on('blur', function(){
+    let cep = $('#cep').val()
+    $.ajax({
+          url: `https://viacep.com.br/ws/${cep}/json/`,
+          method:"get",
+          success: function (response) {
+            console.log(response)
+            $('#cep').val(response.cep)
+            $('#bairro').val(response.bairro)
+            $('#uf').val(response.uf)
+            $('#rua').val(response.logradouro)
+            $('#localidade').val(response.localidade)
+          }
+
+    })
+  })
+  $('#button').on('click', function(){
+
+  })
+
+
+
+</script>
+</body>
+</html>
+
+
