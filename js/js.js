@@ -24,8 +24,13 @@ nav_bar.innerHTML = `
                     </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="produtos.html">
+                    <a class="nav-link" href="produtos.html">
                     Lista de Produtos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="jogoForca.html">
+                        Jogo da Forca
                     </a>
                 </li>
             </ul>
