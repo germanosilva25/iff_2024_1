@@ -62,7 +62,7 @@
     
     //palavra escolhida no array
     let palavra_escolhida = palavras[valor]
-
+    console.log('palavra_escolhida', palavra_escolhida)
     let arr = palavra_escolhida.split('')
 
     const forca = document.getElementById("palavra")
@@ -89,14 +89,14 @@
     ]
     var meuSet = new Set();
     $('#letra').on('keyup', function(){
-        let letra_digitada = $(this).val()
+        let letra_digitada = $(this).val().toLowerCase()
         
         $(this).val('')
         let nao_tem = true
         
         arr.forEach(function(letra, indice){
     
-            if(letra_digitada == letra){
+            if(letra_digitada == letra.removerAcentos()){
                     console.log('letra consta na palavra')
                     $(`#${indice}`).html(`<font color="red">${letra}</font>`)
                     if(!letras_digitadas_usuario.includes(letra_digitada)){
@@ -123,9 +123,12 @@
           arr.forEach(function(letra, indice){
             $(`#${indice}`).html(`<font color="red">${letra}</font>`)
         })
-        }    
-
-    })
+        }   
+        
+        
+      })
+      const removerAcentos = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      String.prototype.removerAcentos = function () { return removerAcentos(this); }
 
     
     
