@@ -33,6 +33,11 @@ nav_bar.innerHTML = `
                         Jogo da Forca
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="calculoSalario.html">
+                        Cálculo Salário
+                    </a>
+                </li>
             </ul>
   
         </div>

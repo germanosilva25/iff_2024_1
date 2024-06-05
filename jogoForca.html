@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 5 Example</title>
+  <title>Jogo da Forca</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,15 +18,17 @@
 </head>
 <body>
 
-<div class="container-fluid p-5 bg-light text-primary text-center">
-  <h1>Jogo da forca</h1>
-  <p>Resize this responsive page to see the effect!</p> 
+<div class="container-fluid bg-light text-primary text-center pt-5">
+  <h4 class="mt-4">Jogo da forca</h4>
 </div>
-<div   class="m-5 p-5">
-    <form action="/action_page.php">
+<div   class="m-1 p-1">
+    <form >
         <div class="mb-3 mt-3">
-          <label for="letras" class="form-label">Letra:</label>
+          <label for="letras" class="form-label">Digite uma letra...</label>
           <input type="letra" class="form-control" id="letra" placeholder="Digite uma letra" name="letra">
+          <div class="bg-light">
+            <img src="images/zero.png" height="250">
+          </div>
           <div>
             <h4 id="letras_digitadas"></h4>
           </div>
@@ -35,15 +37,10 @@
       <div id="palavra">
 
       </div>
-
 </div>
-  
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+<script src="js/js.js"></script>
+<script src="js/jquery.js"></script>
 <script>
-    
-
     const palavras = [
         //palavras de 10 letras
         "dicionário", "intrínseco", "prescindir", "presunçoso", "diligência", "corroborar", "intempérie", "detrimento", "maturidade", "parcimônia", "referência", "inspiração", "inexorável", "pragmático", "prepotente", "incipiente", "disruptivo", "sororidade", "serenidade", "arbitrário", "indulgente", "iniquidade", "auspicioso", "pertinente", "influência", "fornicação", "retumbante", "militância", "consolidar", "etimologia",
@@ -66,12 +63,6 @@
     //palavra escolhida no array
     let palavra_escolhida = palavras[valor]
 
-    console.log('palavra escolhida:', palavra_escolhida)
-    //console.log('qnt_palavras_array_de_palavras:', qnt_palavras_array_de_palavras)
-
-    
-    // document.write(palavra_escolhida)
-
     let arr = palavra_escolhida.split('')
 
     const forca = document.getElementById("palavra")
@@ -79,7 +70,6 @@
     let letras_digitadas_usuario = []
 
     arr.forEach(function(letra, indice){
-            
             const div = document.createElement('div')
             div.id = indice
             div.className = "lado"
@@ -87,39 +77,52 @@
             forca.append(div)
         })
     let acertou = 0
+    let errou = 0
+    let imagens = [
+      'images/zero.png',
+      'images/um.png',
+      'images/dois.png',
+      'images/tres.png',
+      'images/quatro.png',
+      'images/cinco.png',
+      'images/seis.png'
+    ]
+    var meuSet = new Set();
     $('#letra').on('keyup', function(){
-        
         let letra_digitada = $(this).val()
         
-        // $('#letras_digitadas').append(letra_digitada)
         $(this).val('')
-
+        let nao_tem = true
+        
         arr.forEach(function(letra, indice){
     
             if(letra_digitada == letra){
                     console.log('letra consta na palavra')
                     $(`#${indice}`).html(`<font color="red">${letra}</font>`)
-                    // div.id = indice
-                    // div.innerText = letra
                     if(!letras_digitadas_usuario.includes(letra_digitada)){
                          acertou++
                     }
-                        
-  
-            } 
-
-
+                    nao_tem = false      
+            } else {
+              meuSet.add(letra_digitada)
+            }   
         })
-        letras_digitadas_usuario.push(letra_digitada)
+        if(nao_tem){
+              errou++
+              $('img').attr('src', imagens[errou])
+            }
+        console.log('errou', errou)
+        letras_digitadas_usuario = Array.from(meuSet)
         if(acertou == palavra_escolhida.length)
             alert('Parabéns, vocêe acertou a palavra!')
 
         $('#letras_digitadas').html(letras_digitadas_usuario.join('-'))
-
         
-        if(letras_digitadas_usuario.length == palavra_escolhida.length * 2){
+        if(errou == 6){
           alert('Você atingiu o limite de tentativas')
-
+          arr.forEach(function(letra, indice){
+            $(`#${indice}`).html(`<font color="red">${letra}</font>`)
+        })
         }    
 
     })
