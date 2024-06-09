@@ -38,6 +38,11 @@ nav_bar.innerHTML = `
                         Cálculo Salário
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="calculoQuedaCorrente.html">
+                        Cálculo Queda de Tensão
+                    </a>
+                </li>
             </ul>
   
         </div>
