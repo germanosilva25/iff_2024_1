@@ -1,85 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Bootstrap 5 Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Bootstrap 5 Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
 
 
-  
-<div class="container mt-5 py-5 text-center">
-        
+
+    <div class="container mt-5 py-5 text-center">
+
         <h1 class="text-danger">Cáculo Salário Líquido</h1>
-</div>
-<div class="container mt-2">
-  <div class="row">
-    <div class="col-12 mb-5">
-        <label for="customRange3" class="form-label">Deslize para alterar o salário</label>
-        <input id="salario" type="range" class="form-range" min="0" max="15000" step="10" id="customRange3">
     </div>
-    <div class="col-12 text-center my-2">
-        <h1 class="text-dark  my-1">Salário Bruto</h1>
-        <div id="bruto"></div>
-    </div>
-    <div class="col-12 col-md-4 text-center my-3">
-        <h3>Salário Líquido</h3>
-        <div id="liquido">R$ </div>
-    </div>
-    <div class="col-12 col-md-4 text-center my-3">
-        <h3>Imposto de renda</h3>
-        <div id="imposto">R$ </div>
-    </div>
-    <div class="col-12 col-md-4 text-center my-3">
-        <h3>INSS</h3>
-        <div id="inss">R$ </div>
-    </div>
-</div>
-<script src="js/js.js"></script>
-<script src="js/jquery.js"></script>
-<script>
-    $('#salario').on('input', function(){
-        let salario = parseFloat($(this).val()).toFixed(2)
-        let salario_liquido = 0
-        let inss = 0
-        let ir = 0
-        if(salario < 2259){
-            ir = 0.00
-        } else if(salario > 2259 && salario <= 2826.65){
-            ir = salario * 0.075 - 169.44
-        } else if(salario > 2826.65 && salario <= 3751.05){
-            ir = salario * 0.15 - 381.44
-        } else if(salario > 3751.05 && salario <= 4664.68){
-            ir = salario * 0.225 - 662.77
-        } else {
-            ir = salario * 0.275 - 896
-        }
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <label for="customRange3" class="form-label">Deslize para alterar o salário</label>
+                <input id="salario" type="range" class="form-range" min="0" max="15000" step="10" id="customRange3">
+            </div>
+            <div class="col-12 mb-5">
+                <label for="customRange4" class="form-label">Deslize para alterar o número de dependentes</label>
+                <input id="dependentes" type="range" class="form-range" min="0" max="10" step="1" id="customRange4">
+            </div>
+            <div class="col-12 text-center my-2">
+                <h1 class="text-dark  my-1">Salário Bruto</h1>
+                <div id="bruto"></div>
+            </div>
+            <div class="col-12 col-md-4 text-center my-3">
+                <h3>Salário Líquido</h3>
+                <div id="liquido">R$ </div>
+            </div>
+            <div class="col-12 col-md-4 text-center my-3">
+                <h3>Imposto de renda</h3>
+                <div id="imposto">R$ </div>
+            </div>
+            <div class="col-12 col-md-4 text-center my-3">
+                <h3>INSS</h3>
+                <div id="inss">R$ </div>
+            </div>
+            <div class="col-12 col-md-4 text-center my-3">
+                <h3>Dependentes</h3>
+                <div id="qnt_dependentes"></div>
+            </div>
+        </div>
+        <script src="js/js.js"></script>
+        <script src="js/jquery.js"></script>
+        <script>
+            let salario = 0
+            let salario_base = 0
+            let qnt_dependentes = 0
+            $('#salario').on('input', function () {
+                salario = parseFloat($(this).val()).toFixed(2)
+                salario_base = salario
+                qnt_dependentes = parseInt($('#dependentes').val())
+                // console.log('salario', salario)
+                // console.log('salario_base', salario_base)
+                console.log('qnt_dependentes', qnt_dependentes)
+                if (qnt_dependentes > 0) {
+                    // salario_base = salario - qnt_dependentes * 189.6
+                    salario_base = salario - qnt_dependentes * 189.6
+                } else {
+                    salario_base = salario
+                }
+                let salario_liquido = 0
+                let inss = 0
+                let ir = 0
+                if (salario_base < 2259) {
+                    ir = 0.00
+                } else if (salario_base > 2259 && salario_base <= 2826.65) {
+                    ir = salario_base * 0.075 - 169.44
+                } else if (salario_base > 2826.65 && salario_base <= 3751.05) {
+                    ir = salario_base * 0.15 - 381.44
+                } else if (salario_base > 3751.05 && salario_base <= 4664.68) {
+                    ir = salario_base * 0.225 - 662.77
+                } else {
+                    ir = salario_base * 0.275 - 896
+                }
 
-        if(salario <= 1412){
-            inss = salario * 0.075
-        } else if(salario > 1412 && salario <= 2666.68){
-            inss = salario * 0.09
-        } else if(salario > 2666.68 && salario <= 4000.03){
-            inss = salario * 0.12
-        } else if(salario > 4000.03 && salario <= 7786.02){
-            inss = salario * 0.14
-        } else {
-            inss = 7786.02 * 0.14
-        }
+                if (salario <= 1412) {
+                    inss = salario * 0.075
+                } else if (salario > 1412 && salario <= 2666.68) {
+                    inss = salario * 0.09
+                } else if (salario > 2666.68 && salario <= 4000.03) {
+                    inss = salario * 0.12
+                } else if (salario > 4000.03 && salario <= 7786.02) {
+                    inss = salario * 0.14
+                } else {
+                    inss = 7786.02 * 0.14
+                }
 
-        salario_liquido = salario - ir - inss
+                salario_liquido = salario - ir - inss + (qnt_dependentes * 189.6)
 
-        $('#bruto').html(`<h1 class="text-primary my-1">R$ ${salario}</h1>`)
-    
-        $('#imposto').html(`<h1 class="text-danger my-1">R$ ${ir.toFixed(2)}</h1>`)
-    
-        $('#inss').html(`<h1 class="text-danger my-1">R$ ${inss.toFixed(2)}</h1>`)
-      
-        $('#liquido').html(`<h1 class="text-success my-1">R$ ${salario_liquido.toFixed(2)}</h1>`)
-    })
-</script>
+                $('#bruto').html(`<h1 class="text-primary my-1">R$ ${salario}</h1>`)
+
+                $('#imposto').html(`<h1 class="text-danger my-1">R$ ${ir.toFixed(2)}</h1>`)
+
+                $('#inss').html(`<h1 class="text-danger my-1">R$ ${inss.toFixed(2)}</h1>`)
+
+                $('#liquido').html(`<h1 class="text-success my-1">R$ ${salario_liquido.toFixed(2)}</h1>`)
+
+                $('#qnt_dependentes').html(`<h1 class="text-success my-1">${qnt_dependentes}</h1>`)
+
+                $('#salario').val(salario)
+                // $('#dependentes').val(salario_base)
+            })
+        </script>
 </body>
+
 </html>
