@@ -45,7 +45,7 @@ nav_bar.innerHTML = `
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="calculoQuedaCorrente.html">
-                        Cáluco de Piso por m²
+                        Cálculo de Piso por m²
                     </a>
                 </li>
             </ul>
