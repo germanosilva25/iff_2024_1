@@ -43,6 +43,11 @@ nav_bar.innerHTML = `
                         Cálculo Queda de Tensão
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="calculoQuedaCorrente.html">
+                        Cáluco de Piso por m²
+                    </a>
+                </li>
             </ul>
   
         </div>
